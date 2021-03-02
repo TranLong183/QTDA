@@ -25,7 +25,7 @@ namespace QLNS
         {
             foreach (Control ctr in this.groupBox1.Controls)
             {
-                if ((ctr is TextBox) || (ctr is DateTimePicker)||(ctr is ComboBox))
+                if ((ctr is TextBox) || (ctr is DateTimePicker) || (ctr is ComboBox))
                 {
                     ctr.Text = "";
                 }
@@ -79,7 +79,7 @@ namespace QLNS
 
             frmcoban.FillCombo("SELECT MaBoPhan FROM TblBoPhan", comboBox2, "MaBoPhan", "MaBoPhan");
             comboBox2.SelectedIndex = -1;
-            
+
             cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
         }
         public static void FillCombo(string sql, ComboBox cbo, string ma, string ten)
@@ -114,39 +114,39 @@ namespace QLNS
         private void button1_Click(object sender, EventArgs e)
         {
 
-           
-          
+
+
             //try
             //{
-                
-                string insert = "insert into TblTTNVCoBan values(N'" + comboBox2.Text + "',N'" + comboBox3.Text + "',N'" + textBox3.Text + "',N'" + textBox4.Text + "',N'" + comboBox4.Text + "',N'" + dateTimePicker1.Text + "',N'" + comboBox1.Text + "',N'" + textBox8.Text + "',N'" + textBox9.Text + "',N'" + textBox11.Text + "',N'" + textBox12.Text + "',N'" + textBox14.Text + "',N'" + textBox15.Text + "',N'" + dateTimePicker3.Text + "',N'" + dateTimePicker4.Text + "',N'" + textBox19.Text + "')";
 
-                if ((!cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (!cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
+            string insert = "insert into TblTTNVCoBan values(N'" + comboBox2.Text + "',N'" + comboBox3.Text + "',N'" + textBox3.Text + "',N'" + textBox4.Text + "',N'" + comboBox4.Text + "',N'" + dateTimePicker1.Text + "',N'" + comboBox1.Text + "',N'" + textBox8.Text + "',N'" + textBox9.Text + "',N'" + textBox11.Text + "',N'" + textBox12.Text + "',N'" + textBox14.Text + "',N'" + textBox15.Text + "',N'" + dateTimePicker3.Text + "',N'" + dateTimePicker4.Text + "',N'" + textBox19.Text + "')";
+
+            if ((!cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (!cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
+            {
+                if (textBox3.Text != "" && textBox9.Text != "")
                 {
-                    if (textBox3.Text != "" && textBox9.Text != "")
-                    {
-                        cls.thucthiketnoi(insert);
-                        dataGridView1.Refresh();
-                        cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
-                        MessageBox.Show("Thêm thành công");
-                    }
-                    else if (textBox3.Text == "") MessageBox.Show("Bạn chưa nhập Mã nhân viên");
-                    else if (textBox9.Text == "") MessageBox.Show("Bạn chưa nhập số CMTND");
+                    cls.thucthiketnoi(insert);
+                    dataGridView1.Refresh();
+                    cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
+                    MessageBox.Show("Thêm thành công");
                 }
-                else if ((!cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
+                else if (textBox3.Text == "") MessageBox.Show("Bạn chưa nhập Mã nhân viên");
+                else if (textBox9.Text == "") MessageBox.Show("Bạn chưa nhập số CMTND");
+            }
+            else if ((!cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
+            {
+                if (MessageBox.Show("Nhân viên này đã từng làm ở công ty, bạn có chắc muốn thêm?", "Thêm thất bại", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (MessageBox.Show("Nhân viên này đã từng làm ở công ty, bạn có chắc muốn thêm?", "Thêm thất bại", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-                        cls.thucthiketnoi(insert);
-                        cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
-                        MessageBox.Show("Thêm thành công");
-                        string delete = "delete from TblNVThoiViec where CMTND='" + textBox9.Text + "'";
-                        cls.thucthiketnoi(delete);
-                    }
+                    cls.thucthiketnoi(insert);
+                    cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
+                    MessageBox.Show("Thêm thành công");
+                    string delete = "delete from TblNVThoiViec where CMTND='" + textBox9.Text + "'";
+                    cls.thucthiketnoi(delete);
                 }
-                else if ((cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (!cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
-                    MessageBox.Show("Mã nhân viên này đã tồn tại", "Thêm thất bại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                
+            }
+            else if ((cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTNVCoBan")) && (!cls.kttrungkhoa(textBox9.Text, "select CMTND from TblNVThoiViec")))
+                MessageBox.Show("Mã nhân viên này đã tồn tại", "Thêm thất bại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             string ine = "insert into TblTTCaNhan(MaNV,HoTen) select MaNV,HoTen from TblTTNVCoBan where MaNV='" + textBox3.Text + "'";
             if ((!cls.kttrungkhoa(textBox3.Text, "select MaNV from TblTTCaNhan")))
             {
@@ -171,12 +171,12 @@ namespace QLNS
             }
             else
                 MessageBox.Show("Mã nhân viên này đã tồn tại", "Thêm thất bại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            string updata = " update TblCongKhoiDieuHanh set TenPhong = (select top(1) TenPhong from TblPhongBan a,TblTTNVCoBan b where a.MaPhong=b.MaPhong and a.MaPhong=N'"+comboBox3.Text+"' group by TenPhong) where MaNV='" + textBox3.Text + "'";
-            
-                    cls.thucthiketnoi(updata);
-                    dataGridView1.Refresh();
-              
-        
+            string updata = " update TblCongKhoiDieuHanh set TenPhong = (select top(1) TenPhong from TblPhongBan a,TblTTNVCoBan b where a.MaPhong=b.MaPhong and a.MaPhong=N'" + comboBox3.Text + "' group by TenPhong) where MaNV='" + textBox3.Text + "'";
+
+            cls.thucthiketnoi(updata);
+            dataGridView1.Refresh();
+
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -189,7 +189,7 @@ namespace QLNS
                 textBox3.Text = dataGridView1.Rows[hang].Cells[2].Value.ToString();
                 textBox4.Text = dataGridView1.Rows[hang].Cells[3].Value.ToString();
                 comboBox4.Text = dataGridView1.Rows[hang].Cells[4].Value.ToString();
-                
+
                 dateTimePicker1.Text = dataGridView1.Rows[hang].Cells[5].Value.ToString();
                 comboBox1.Text = dataGridView1.Rows[hang].Cells[6].Value.ToString();
                 textBox8.Text = dataGridView1.Rows[hang].Cells[7].Value.ToString();
@@ -212,11 +212,11 @@ namespace QLNS
         {
             //try
             //{
-                string update = "update TblTTNVCoBan set MaBoPhan=N'" + comboBox2.Text + "',MaPhong=N'" + comboBox3.Text + "',HoTen=N'" + textBox4.Text + "',MaLuong=N'" + comboBox4.Text + "',NgaySinh='" + dateTimePicker1.Text + "',GioiTinh=N'" + comboBox1.Text + "',TTHonNhan=N'" + textBox8.Text + "',CMTND=N'" + textBox9.Text + "',NoiCap=N'" + textBox11.Text + "',ChucVu=N'" + textBox12.Text + "',LoaiHD=N'" + textBox14.Text + "',ThoiGian=N'" + textBox15.Text + "',NgayKy='" + dateTimePicker3.Text + "',NgayHetHan='" + dateTimePicker4.Text + "',GhiChu=N'" + textBox19.Text + "' where MaNV=N'" + textBox3.Text + "'";
-                cls.thucthiketnoi(update);
-                dataGridView1.Refresh();
-                cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
-                MessageBox.Show("Sửa thảnh công");
+            string update = "update TblTTNVCoBan set MaBoPhan=N'" + comboBox2.Text + "',MaPhong=N'" + comboBox3.Text + "',HoTen=N'" + textBox4.Text + "',MaLuong=N'" + comboBox4.Text + "',NgaySinh='" + dateTimePicker1.Text + "',GioiTinh=N'" + comboBox1.Text + "',TTHonNhan=N'" + textBox8.Text + "',CMTND=N'" + textBox9.Text + "',NoiCap=N'" + textBox11.Text + "',ChucVu=N'" + textBox12.Text + "',LoaiHD=N'" + textBox14.Text + "',ThoiGian=N'" + textBox15.Text + "',NgayKy='" + dateTimePicker3.Text + "',NgayHetHan='" + dateTimePicker4.Text + "',GhiChu=N'" + textBox19.Text + "' where MaNV=N'" + textBox3.Text + "'";
+            cls.thucthiketnoi(update);
+            dataGridView1.Refresh();
+            cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
+            MessageBox.Show("Sửa thảnh công");
             //}
             //catch
             //{
@@ -230,13 +230,13 @@ namespace QLNS
 
             cls.thucthiketnoi(ds);
             dataGridView1.Refresh();
-              
+
         }
 
-        
-        
-            
-   
+
+
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             string insert = "insert into TblNVThoiViec(HoTen,CMTND,LyDo) select HoTen,CMTND,GhiChu from TblTTNVCoBan where MaNV='" + textBox3.Text + "'";
@@ -245,18 +245,18 @@ namespace QLNS
                 cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
             }
             MessageBox.Show("Thêm thành công dữ liệu vào bảng NVThoiViec");
-            
-        
-           string delete = "delete from TblTTNVCoBan where MaNV=N'" + textBox3.Text + "'";
+
+
+            string delete = "delete from TblTTNVCoBan where MaNV=N'" + textBox3.Text + "'";
             if (MessageBox.Show("Bạn có muốn xóa không", "Xóa dữ liệu ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 cls.thucthiketnoi(delete);
                 cls.loaddatagridview(dataGridView1, "select * from TblTTNVCoBan");
             }
             MessageBox.Show("Đã xóa dữ liệu ");
-            
 
-           }
+
+        }
 
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
@@ -265,7 +265,7 @@ namespace QLNS
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button1_MouseMove(object sender, MouseEventArgs e)
@@ -282,7 +282,7 @@ namespace QLNS
         {
             //string sql;
             //sql = "Select MaPhong from tblPhongBan where MaBoPhan=N'" + comboBox2.Text + "'";
-            
+
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -290,8 +290,8 @@ namespace QLNS
             frmcoban.FillCombo("select p.MaPhong from TblBoPhan b,TblPhongBan p where b.MaBoPhan=p.MaBoPhan and p.MaBoPhan=N'" + comboBox2.SelectedValue + "'", comboBox3, "MaPhong", "MaPhong");
             comboBox3.DisplayMember = "MaPhong";
             comboBox3.ValueMember = "MaPhong";
-           
-            
+
+
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
