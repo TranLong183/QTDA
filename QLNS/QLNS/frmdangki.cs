@@ -32,16 +32,16 @@ namespace QLNS
             //    }
             //}
 
-           
-            
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-            dateTimePicker1.CustomFormat = "MM/dd/yyyy";
-            string insert = "insert into tbuser values(N'" + textBox1.Text + "',N'" + textBox2.Text + "',N'" + textBox4.Text + "',N'" + textBox3.Text + "','" + dateTimePicker1.Text + "')";
+                dateTimePicker1.CustomFormat = "MM/dd/yyyy";
+                string insert = "insert into tbuser values(N'" + textBox1.Text + "',N'" + textBox2.Text + "',N'" + textBox4.Text + "',N'" + textBox3.Text + "','" + dateTimePicker1.Text + "')";
                 if (cls.kttrungkhoa(textBox1.Text, "select * from tbuser") == true)
                     MessageBox.Show("Tên đăng nhập này đã tồn tại. Bạn có thể thử tên khác");
                 else
@@ -81,7 +81,7 @@ namespace QLNS
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-            
+
         }
 
         private void button3_MouseMove(object sender, MouseEventArgs e)
@@ -116,14 +116,14 @@ namespace QLNS
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             try
             {
-                string update = "update tbuser set Username=N'" + textBox1.Text + "',Pass=N'" + textBox2.Text + "',Quyen=N'" + textBox4.Text + "',Ten=N'" + textBox3.Text + "',Ngaysinh='" + dateTimePicker1.Text + "' where Username='"+textBox1.Text+"'";
+                string update = "update tbuser set Username=N'" + textBox1.Text + "',Pass=N'" + textBox2.Text + "',Quyen=N'" + textBox4.Text + "',Ten=N'" + textBox3.Text + "',Ngaysinh='" + dateTimePicker1.Text + "' where Username='" + textBox1.Text + "'";
                 cls.thucthiketnoi(update);
                 cls.loaddatagridview(dataGridView1, "select * from tbuser");
                 MessageBox.Show("Sửa thành công");
@@ -147,7 +147,7 @@ namespace QLNS
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -175,7 +175,7 @@ namespace QLNS
             this.Close();
         }
 
-       
+
     }
 
 }
