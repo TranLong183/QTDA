@@ -113,14 +113,14 @@ namespace QLNS
 
         private void frmthongtincanhan_Load(object sender, EventArgs e)
         {
-            
+
             cls.loaddatagridview(dataGridView1, "select * from TblTTCaNhan");
             cls.loadcombobox(comboBox1, "select * from TblTTNVCoBan", 2);
         }
-      
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+
 
 
             try
@@ -195,8 +195,8 @@ namespace QLNS
 
         private void button4_Click(object sender, EventArgs e)
         {
-           
-            
+
+
         }
 
         private void button6_MouseMove(object sender, MouseEventArgs e)
@@ -209,6 +209,6 @@ namespace QLNS
             ((Button)sender).BackgroundImage = Properties.Resources.xanh;
         }
 
-       
+
     }
 }

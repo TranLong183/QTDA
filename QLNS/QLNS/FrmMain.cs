@@ -49,7 +49,7 @@ namespace QLNS
         public static string quyen;
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            
+
             if (quyen == "Admin")
             {
                 menuItem2.Enabled = true;
@@ -57,7 +57,7 @@ namespace QLNS
                 menuItem14.Enabled = true;
                 menuItem5.Enabled = true;
             }
-            else if(quyen=="user")
+            else if (quyen == "user")
             {
                 menuItem2.Enabled = true;
                 menuItem3.Enabled = true;
@@ -521,7 +521,7 @@ namespace QLNS
 
         }
 
-     
+
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
@@ -676,7 +676,7 @@ namespace QLNS
             x.Show();
         }
 
-       
+
 
 
     }
